@@ -1,0 +1,26 @@
+package mytestcase;
+
+import java.sql.SQLException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Test {
+	public static void main(String[] args) throws SQLException, InterruptedException {
+		System.setProperty("webdriver.gecko.driver", "/home/dinesh/Downloads/driver/geckodriver");
+		WebDriver driver = new FirefoxDriver();
+		String url = "https://www.saasworthy.com/";
+		driver.get(url);
+		driver.manage().window().maximize();
+		driver.findElement(By.partialLinkText("Web Analytics Software")).click();
+		String url1 = driver.getCurrentUrl();
+		System.out.println(url1);
+		String url2 = url1 +"?page=";
+		for(int i=0; i<10; i++) {
+			String url3 = url2 + i;
+			driver.get(url3);
+			System.out.println(url3);
+		}
+	}
+}
+

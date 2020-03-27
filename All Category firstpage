@@ -1,0 +1,31 @@
+package mytestcase;
+
+import java.sql.SQLException;
+import java.util.List;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Data {
+	public static void main(String[] args) throws SQLException {
+		System.setProperty("webdriver.gecko.driver", "/home/dinesh/Downloads/driver/geckodriver");
+		WebDriver driver = new FirefoxDriver();
+		driver.get("https://www.saasworthy.com/");
+		driver.manage().window().maximize();
+		List<WebElement> data = driver.findElements(By.xpath("//div[@class='catgry_titl']"));
+		int expectedcount = 28;
+		int orginalcount = data.size();
+		Assert.assertEquals(orginalcount, expectedcount);
+		for (WebElement dat : data) {
+			List<WebElement> data1 = driver.findElements(By.xpath("/html/body/div[21]/div/div/div/div/ul/li/a"));
+			for (WebElement dat1 : data1) {
+			    String listname = dat1.getText();
+				String titlename = dat.getText();
+				System.out.println("The Category title is "+titlename+" and list title is "+listname );
+		   }
+		}
+   }
+}
+
