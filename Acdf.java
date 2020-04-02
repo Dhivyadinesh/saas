@@ -3,6 +3,7 @@ package mytestcase;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,16 +26,14 @@ public class Acdf {
 		List<WebElement> pagination =driver.findElements(By.xpath("//ul[@class='pagination']/li/a")); 
 		int paginationcount = pagination.size();
 		System.out.println("The "+CatgyName+" has contains "+paginationcount+" number of pages");
-		
-		if(paginationcount >1){ 
-			for(int i=0; i<paginationcount; i++){ 
-			pagination.get(i).click(); 
-			}
-	   List<WebElement> Soft =driver.findElements(By.className("fndr-title")); 
-	   for(WebElement Title : Soft ) {
-		   String SoftTitle = Title.getText();
-		   System.out.println(SoftTitle);
-	      }
+		String url1 = driver.getCurrentUrl();
+		String url2 = url1 +"?page=";
+		for(int i=0; i<=paginationcount; i++) {
+			String url3 = url2 + i;
+			driver.get(url3);
+			  List<WebElement> paginationList =driver.findElements(By.className("fndr-title"));
+			    	int Count = paginationList.size();
+         			System.out.println(url3+" has " + Count +" Number of software in the page");
 		}
 	}
 }
